@@ -2,9 +2,18 @@
   "name": "vue-neat-modal",
   "version": "0.1.0",
   "description": "Vue 3 Modal component",
-  "main": "index.js",
+  "main": "dist/vue-neat-modal.cjs.js",
+  "module": "dist/vue-neat-modal.esm.js",
   "scripts": {
+    "clear": "rimraf dist",
+    "watch": "rollup -c rollup.config.js --watch",
+    "build": "npm run clear && rollup -c rollup.config.js",
+    "playground": "parcel playground/index.html --out-dir public",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "alias": {
+    "vue-neat-modal": "./dist/vue-neat-modal.esm.js"
   },
   "keywords": [
     "vue modal",
@@ -21,6 +30,26 @@
   "bugs": {
     "url": "https://github.com/DarkC0der11/vue-neat-modal/issues"
   },
+  "files": [
+    "dist"
+  ],
   "author": "DarkC0der",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@vue/babel-plugin-jsx": "^1.0.0-rc.3",
+    "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.32.1",
+    "rollup-plugin-scss": "^2.6.1",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.3",
+    "vue": "^3.0.2"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.2"
+  }
 }
