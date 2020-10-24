@@ -14,6 +14,13 @@
     "vue3 popup",
     "vue3 dialog"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DarkC0der11/vue-neat-modal"
+  },
+  "bugs": {
+    "url": "https://github.com/DarkC0der11/vue-neat-modal/issues",
+  },
   "author": "DarkC0der",
   "license": "MIT"
 }
