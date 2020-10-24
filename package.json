@@ -1,0 +1,19 @@
+{
+  "name": "vue-neat-modal",
+  "version": "0.1.0",
+  "description": "Vue 3 Modal component",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue modal",
+    "vue popup",
+    "vue dialog",
+    "vue3 modal",
+    "vue3 popup",
+    "vue3 dialog"
+  ],
+  "author": "DarkC0der",
+  "license": "MIT"
+}
