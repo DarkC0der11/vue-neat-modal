@@ -9,6 +9,8 @@ import {
   onUnmounted
 } from 'vue'
 
+import { getGlobalPropDefault } from '../../prop-defaults'
+
 const COMPONENT_CLASS = 'vue-neat-modal'
 
 export default defineComponent({
@@ -22,52 +24,52 @@ export default defineComponent({
 
     eager: {
       type: Boolean,
-      default: false
+      default: () => getGlobalPropDefault('eager')
     },
 
     clickOut: {
       type: Boolean,
-      default: true
+      default: () => getGlobalPropDefault('clickOut')
     },
 
     teleportTarget: {
       type: [String, HTMLElement],
-      default: '#app'
+      default: () => getGlobalPropDefault('teleportTarget')
     },
 
     backdropTransition: {
       type: String,
-      default: undefined
+      default: () => getGlobalPropDefault('backdropTransition')
     },
 
     contentTransition: {
       type: String,
-      default: 'scale'
+      default: () => getGlobalPropDefault('contentTransition')
     },
 
     disableMotion: {
       type: Boolean,
-      default: false
+      default: () => getGlobalPropDefault('disableMotion')
     },
 
     removeBackdrop: {
       type: Boolean,
-      default: false
+      default: () => getGlobalPropDefault('removeBackdrop')
     },
 
     width: {
       type: String,
-      default: 'auto'
+      default: () => getGlobalPropDefault('width')
     },
 
     maxWidth: {
       type: String,
-      default: 'none'
+      default: () => getGlobalPropDefault('maxWidth')
     },
 
     fullscreen: {
       type: Boolean,
-      default: false
+      default: () => getGlobalPropDefault('fullscreen')
     }
   },
 

@@ -1,4 +1,13 @@
-import { createApp } from 'vue';
-import App from './App';
+import { createApp } from 'vue'
+import App from './App'
+import VueNeatModal from '../'
 
-createApp(App).mount(document.getElementById('app'));
+const app = createApp(App)
+
+app.use(VueNeatModal, {
+  defaultProps: {
+    contentTransition: 'slide-down'
+  }
+})
+
+app.mount(document.getElementById('app'))

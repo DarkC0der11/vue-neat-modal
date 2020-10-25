@@ -1,4 +1,4 @@
-import { Modal } from 'vue-neat-modal'
+import { Modal } from '../'
 import '../dist/vue-neat-modal.css'
 import './App.css'
 
