@@ -73,7 +73,7 @@ export default defineComponent({
 
   setup (props, { slots, emit }) {
     const innerValue = ref(false)
-    const isMounted = ref(false)
+    const isMounted = ref(props.eager)
     const isVisible = computed(() => (
       props.modelValue ||
         innerValue.value
