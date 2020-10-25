@@ -1,7 +1,15 @@
-import './Modal.scss';
-import { computed, defineComponent, Teleport, ref, watch, Transition, onMounted, nextTick, onUnmounted } from 'vue';
+import './Modal.scss'
+import {
+  computed,
+  defineComponent,
+  Teleport,
+  ref,
+  watch,
+  Transition,
+  onUnmounted
+} from 'vue'
 
-const COMPONENT_CLASS = 'vue-neat-modal';
+const COMPONENT_CLASS = 'vue-neat-modal'
 
 export default defineComponent({
   inheritAttrs: false,
@@ -14,12 +22,12 @@ export default defineComponent({
 
     eager: {
       type: Boolean,
-      default: false,
+      default: false
     },
 
     clickOut: {
       type: Boolean,
-      default: true,
+      default: true
     },
 
     teleportTarget: {
@@ -29,155 +37,153 @@ export default defineComponent({
 
     backdropTransition: {
       type: String,
-      default: undefined,
+      default: undefined
     },
 
     contentTransition: {
       type: String,
-      default: 'scale',
+      default: 'scale'
     },
 
     disableMotion: {
       type: Boolean,
-      default: false,
+      default: false
     },
 
     removeBackdrop: {
       type: Boolean,
-      default: false,
+      default: false
     },
 
     width: {
       type: String,
-      default: 'auto',
+      default: 'auto'
     },
 
     maxWidth: {
       type: String,
-      default: 'none',
+      default: 'none'
     },
 
     fullscreen: {
       type: Boolean,
-      default: false,
+      default: false
     }
   },
 
-  setup(props, { slots, emit }) {
-    const innerValue = ref(false);
-    const isMounted = ref(false);
-    const isVisible = computed(() => {
-      return (
-        props.modelValue 
-        || innerValue.value
-      );
-    });
+  setup (props, { slots, emit }) {
+    const innerValue = ref(false)
+    const isMounted = ref(false)
+    const isVisible = computed(() => (
+      props.modelValue ||
+        innerValue.value
+    ))
+
     const style = computed(() => ({
-      maxWidth: props.maxWidth,
-    }));
+      maxWidth: props.maxWidth
+    }))
+
     const classes = computed(() => ({
       [`${COMPONENT_CLASS}`]: true,
       [`${COMPONENT_CLASS}--fullscreen`]: props.fullscreen
-    }));
+    }))
 
     watch([() => props.modelValue, innerValue], (modelValue, innerValue) => {
-      if(!isMounted.value && (modelValue || innerValue)) {
-        isMounted.value = true;
+      if (!isMounted.value && (modelValue || innerValue)) {
+        isMounted.value = true
       }
-    }); 
+    })
 
     const onClickOut = () => {
-      if(!props.clickOut) return;
+      if (!props.clickOut) return
 
-      if(props.modelValue === undefined) {
-        innerValue.value = false;
+      if (props.modelValue === undefined) {
+        innerValue.value = false
       } else {
-        emit("update:modelValue", false);
+        emit('update:modelValue', false)
       }
-    };
+    }
 
     const onDocumentClick = (e: MouseEvent) => {
-      if(e.bubbles && !isVisible.value) return;
+      if (e.bubbles && !isVisible.value) return
 
-      const target = e.target as HTMLElement;
+      const target = e.target as HTMLElement
 
-      if(!target.closest(`.${COMPONENT_CLASS}`)) {
-        onClickOut();
+      if (!target.closest(`.${COMPONENT_CLASS}`)) {
+        onClickOut()
       }
-    };
+    }
 
     watch(isVisible, (value) => {
       setTimeout(() => {
-        if(value) {
-          document.addEventListener('click', onDocumentClick);
+        if (value) {
+          document.addEventListener('click', onDocumentClick)
         } else {
-          document.removeEventListener('click', onDocumentClick);
+          document.removeEventListener('click', onDocumentClick)
         }
-      }, 0) 
-    });
+      }, 0)
+    })
 
     onUnmounted(() => {
-      document.removeEventListener('click', onDocumentClick);
-    });
+      document.removeEventListener('click', onDocumentClick)
+    })
 
     const genBackdrop = () => {
-      if(props.removeBackdrop) return null;
+      if (props.removeBackdrop) return null
 
       const backdrop = (
-        <div 
+        <div
           v-show={isVisible.value}
           class={{
             [`${COMPONENT_CLASS}-backdrop`]: true,
             [`${COMPONENT_CLASS}-backdrop--active`]: isVisible.value
           }}
         />
-      );
+      )
 
-      if(props.disableMotion) return backdrop;
+      if (props.disableMotion) return backdrop
 
       return (
-        <Transition 
+        <Transition
           appear
           name={props.backdropTransition}
         >
           {backdrop}
         </Transition>
       )
-    };
+    }
 
     const genContent = () => {
       const modal = (
-        <div 
+        <div
           v-show={isVisible.value}
           class={classes.value}
           style={style.value}
         >
           {slots.default!()}
         </div>
-      );
+      )
 
-      if(props.disableMotion) return modal;
+      if (props.disableMotion) return modal
 
       return (
-        <Transition 
+        <Transition
           appear
           name={props.contentTransition}
         >
           {modal}
         </Transition>
-      );
-    };
-
-    const genWrapper = () => {
-      return (
-        <div class={`${COMPONENT_CLASS}-wrapper`}>
-          {genContent()}
-        </div>
       )
-    };
+    }
+
+    const genWrapper = () => (
+      <div class={`${COMPONENT_CLASS}-wrapper`}>
+        {genContent()}
+      </div>
+    )
 
     const genModal = () => {
-      if(!isMounted.value) return null;
+      if (!isMounted.value) return null
 
       return (
         <Teleport to={props.teleportTarget}>
@@ -187,16 +193,16 @@ export default defineComponent({
       )
     }
 
-    if(slots.activator) {
+    if (slots.activator) {
       const slotProps = {
         onClick: () => {
-          if(props.modelValue === undefined) {
-            innerValue.value = !innerValue.value;
+          if (props.modelValue === undefined) {
+            innerValue.value = !innerValue.value
           } else {
-            emit('update:modelValue', !props.modelValue);
+            emit('update:modelValue', !props.modelValue)
           }
         }
-      };
+      }
 
       return () => (
         <>
@@ -206,6 +212,6 @@ export default defineComponent({
       )
     }
 
-    return genModal;
+    return genModal
   }
-});
+})
