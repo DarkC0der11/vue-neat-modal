@@ -4,6 +4,7 @@
   "description": "Vue 3 Modal component",
   "main": "dist/vue-neat-modal.cjs.js",
   "module": "dist/vue-neat-modal.esm.js",
+  "typings": "types/index.d.ts",
   "scripts": {
     "clear": "rimraf dist",
     "watch": "rollup -c rollup.config.js --watch",
@@ -11,9 +12,6 @@
     "playground": "parcel playground/index.html --out-dir public",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "alias": {
-    "vue-neat-modal": "./dist/vue-neat-modal.esm.js"
   },
   "keywords": [
     "vue modal",
