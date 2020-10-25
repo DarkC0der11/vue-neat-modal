@@ -1,5 +1,15 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "es2015",
+    "strict": true,
     "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
   }
 }
