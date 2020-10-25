@@ -1,10 +1,211 @@
 import './Modal.scss';
-import { defineComponent } from 'vue';
+import { computed, defineComponent, Teleport, ref, watch, Transition, onMounted, nextTick, onUnmounted } from 'vue';
 
-export default defineComponent(() => {
-  return () => (
-    <div class="vue-neat-modal">
-      Neat modal
-    </div>
-  )
+const COMPONENT_CLASS = 'vue-neat-modal';
+
+export default defineComponent({
+  inheritAttrs: false,
+
+  props: {
+    modelValue: {
+      type: Boolean,
+      default: undefined
+    },
+
+    eager: {
+      type: Boolean,
+      default: false,
+    },
+
+    clickOut: {
+      type: Boolean,
+      default: true,
+    },
+
+    teleportTarget: {
+      type: [String, HTMLElement],
+      default: '#app'
+    },
+
+    backdropTransition: {
+      type: String,
+      default: undefined,
+    },
+
+    contentTransition: {
+      type: String,
+      default: 'scale',
+    },
+
+    disableMotion: {
+      type: Boolean,
+      default: false,
+    },
+
+    removeBackdrop: {
+      type: Boolean,
+      default: false,
+    },
+
+    width: {
+      type: String,
+      default: 'auto',
+    },
+
+    maxWidth: {
+      type: String,
+      default: 'none',
+    },
+
+    fullscreen: {
+      type: Boolean,
+      default: false,
+    }
+  },
+
+  setup(props, { slots, emit }) {
+    const innerValue = ref(false);
+    const isMounted = ref(false);
+    const isVisible = computed(() => {
+      return (
+        props.modelValue 
+        || innerValue.value
+      );
+    });
+    const style = computed(() => ({
+      maxWidth: props.maxWidth,
+    }));
+    const classes = computed(() => ({
+      [`${COMPONENT_CLASS}`]: true,
+      [`${COMPONENT_CLASS}--fullscreen`]: props.fullscreen
+    }));
+
+    watch([() => props.modelValue, innerValue], (modelValue, innerValue) => {
+      if(!isMounted.value && (modelValue || innerValue)) {
+        isMounted.value = true;
+      }
+    }); 
+
+    const onClickOut = () => {
+      if(!props.clickOut) return;
+
+      if(props.modelValue === undefined) {
+        innerValue.value = false;
+      } else {
+        emit("update:modelValue", false);
+      }
+    };
+
+    const onDocumentClick = (e: MouseEvent) => {
+      if(e.bubbles && !isVisible.value) return;
+
+      const target = e.target as HTMLElement;
+
+      if(!target.closest(`.${COMPONENT_CLASS}`)) {
+        onClickOut();
+      }
+    };
+
+    watch(isVisible, (value) => {
+      setTimeout(() => {
+        if(value) {
+          document.addEventListener('click', onDocumentClick);
+        } else {
+          document.removeEventListener('click', onDocumentClick);
+        }
+      }, 0) 
+    });
+
+    onUnmounted(() => {
+      document.removeEventListener('click', onDocumentClick);
+    });
+
+    const genBackdrop = () => {
+      if(props.removeBackdrop) return null;
+
+      const backdrop = (
+        <div 
+          v-show={isVisible.value}
+          class={{
+            [`${COMPONENT_CLASS}-backdrop`]: true,
+            [`${COMPONENT_CLASS}-backdrop--active`]: isVisible.value
+          }}
+        />
+      );
+
+      if(props.disableMotion) return backdrop;
+
+      return (
+        <Transition 
+          appear
+          name={props.backdropTransition}
+        >
+          {backdrop}
+        </Transition>
+      )
+    };
+
+    const genContent = () => {
+      const modal = (
+        <div 
+          v-show={isVisible.value}
+          class={classes.value}
+          style={style.value}
+        >
+          {slots.default!()}
+        </div>
+      );
+
+      if(props.disableMotion) return modal;
+
+      return (
+        <Transition 
+          appear
+          name={props.contentTransition}
+        >
+          {modal}
+        </Transition>
+      );
+    };
+
+    const genWrapper = () => {
+      return (
+        <div class={`${COMPONENT_CLASS}-wrapper`}>
+          {genContent()}
+        </div>
+      )
+    };
+
+    const genModal = () => {
+      if(!isMounted.value) return null;
+
+      return (
+        <Teleport to={props.teleportTarget}>
+          {genBackdrop()}
+          {genWrapper()}
+        </Teleport>
+      )
+    }
+
+    if(slots.activator) {
+      const slotProps = {
+        onClick: () => {
+          if(props.modelValue === undefined) {
+            innerValue.value = !innerValue.value;
+          } else {
+            emit('update:modelValue', !props.modelValue);
+          }
+        }
+      };
+
+      return () => (
+        <>
+          {slots.activator!(slotProps)}
+          {genModal()}
+        </>
+      )
+    }
+
+    return genModal;
+  }
 });

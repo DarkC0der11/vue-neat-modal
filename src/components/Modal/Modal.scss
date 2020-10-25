@@ -1,3 +1,87 @@
+.vue-neat-modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(#2e2e2e, .5);
+  pointer-events: none;
+
+  &--active {
+    pointer-events: auto;
+  }
+
+  &.v-enter-active, 
+  &.v-leave-active {
+    transition: .3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  }
+
+  &.v-enter-from, 
+  &.v-leave-to {
+    opacity: 0;
+  }
+}
+
+.vue-neat-modal-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
 .vue-neat-modal {
-  background: #000;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+  transition: .3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  margin: 24px;
+  max-height: 90%;
+  overflow-y: auto;
+
+  &--fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+  }
+
+  // Scale transition (default)
+  &.scale-enter-from, 
+  &.scale-leave-to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  // Slide Y Transition
+  &.slide-down-enter-from, 
+  &.slide-down-leave-to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  // Slide Y Reverse transition
+  &.slide-up-enter-from, 
+  &.slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  // Fullscreen
+  &.move-up-enter-from,
+  &.move-up-leave-to {
+    transform: translateY(100%);
+  }
+
+  &.move-down-enter-from,
+  &.move-down-leave-to {
+    transform: translateY(-100%);
+  }
 }
