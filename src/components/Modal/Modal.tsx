@@ -175,6 +175,16 @@ export default defineComponent({
       )
     }
 
+    const defaultSlotProps = {
+      close: () => {
+        if (props.modelValue !== undefined) {
+          emit('update:modelValue', false)
+        } else {
+          innerValue.value = false
+        }
+      }
+    }
+
     const genModal = () => {
       const modal = (
         <div
@@ -182,7 +192,7 @@ export default defineComponent({
           class={modalClasses.value}
           style={modalStyle.value}
         >
-          {slots.default!()}
+          {slots.default!(defaultSlotProps)}
         </div>
       )
 
