@@ -135,6 +135,46 @@ You can use slot props for convienience, and still keep a model it is totally fi
 
 Feel free to mix and match slots / model control, everything is synced. For instance if you want you can remove activator, while still keeping the default slot prop which exposes a nice `close` method for convinience. Then you can toggle modal from anywhere else through model variable. 
 
+### Modal Transitions
+
+You can easily change the transition of the modal content by setting `modalTransition` prop
+
+```html
+  <template>
+    <Modal modal-transition="slide-down">
+      <div>
+        Now I will slide down instead of scale =)
+      </div>
+    </Modal>
+  </template>
+```
+
+By default Vue Neat Modal provides 5 transitions for `modalTransition`
+
+Those are: `scale`, `slide-down`, `slide-up`, `move-down`, `move-up`
+
+For non-fullscreen modals avoid using `move-down` and `move-up` because they perform nicely only with fullscreen modals when there is a block that fully covers the screen which can fully move down or up by it's height.
+
+You can easily create your own transition and pass the name of it as prop, under the hood it just passes it to Vue's transition component, no magic happening here =)
+
+### Global Default Props
+You can set global default props for all of your modals to prevent repetition, for instance if you want all of your modals transition be `slide-down` instead of it's default `scale`.
+
+In your main entry file 
+
+```js
+  // Import helper function 
+  import { setDefaultProps } from 'vue-neat-modal'
+
+  // Call it and pass object
+  setDefaultProps({
+    // Now all of your modals will have slide-down by default
+    modalTransition: 'slide-down',
+
+    // You can pass any valid modal props...
+  })
+```
+
 ### Props
 | prop               | desc                                                                               | type                  | default   |
 |--------------------|------------------------------------------------------------------------------------|-----------------------|-----------|
