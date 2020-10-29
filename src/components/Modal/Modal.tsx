@@ -9,7 +9,7 @@ import {
   onUnmounted
 } from 'vue'
 
-import { getDefaultProp } from '../../prop-defaults'
+import { getDefaultProp } from '../../default-props'
 
 const COMPONENT_CLASS = 'vue-neat-modal'
 
