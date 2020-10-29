@@ -21,8 +21,13 @@ export declare interface VueNeatModalProps {
   [key: string]: any;
 }
 
+export declare interface VueNeatModalListenerProps {
+  onAfterEnter(): void;
+  onAfterLeave(): void;
+}
+
 export declare function setDefaultProps(props: VueNeatModalProps): void;
 
 export declare const Modal: new () => {
-  $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & VueNeatModalProps;
+  $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & VueNeatModalProps & VueNeatModalListenerProps;
 }

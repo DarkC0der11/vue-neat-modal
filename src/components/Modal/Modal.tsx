@@ -16,6 +16,12 @@ const COMPONENT_CLASS = 'vue-neat-modal'
 export default defineComponent({
   inheritAttrs: false,
 
+  emits: [
+    'after-enter',
+    'after-leave',
+    'update:modelValue'
+  ],
+
   props: {
     modelValue: {
       type: Boolean,
@@ -85,11 +91,11 @@ export default defineComponent({
         innerValue.value
     ))
 
-    const style = computed(() => ({
+    const modalStyle = computed(() => ({
       maxWidth: props.maxWidth
     }))
 
-    const classes = computed(() => [
+    const modalClasses = computed(() => [
       COMPONENT_CLASS,
       props.fullscreen && `${COMPONENT_CLASS}--fullscreen`,
       props.modalClass
@@ -162,18 +168,19 @@ export default defineComponent({
         <Transition
           appear
           name={props.backdropTransition}
+          onAfterLeave={() => emit('after-leave')}
         >
           {backdrop}
         </Transition>
       )
     }
 
-    const genContent = () => {
+    const genModal = () => {
       const modal = (
         <div
           v-show={isVisible.value}
-          class={classes.value}
-          style={style.value}
+          class={modalClasses.value}
+          style={modalStyle.value}
         >
           {slots.default!()}
         </div>
@@ -185,6 +192,7 @@ export default defineComponent({
         <Transition
           appear
           name={props.contentTransition}
+          onAfterEnter={() => emit('after-enter')}
         >
           {modal}
         </Transition>
@@ -193,11 +201,11 @@ export default defineComponent({
 
     const genWrapper = () => (
       <div class={wrapperClasses.value}>
-        {genContent()}
+        {genModal()}
       </div>
     )
 
-    const genModal = () => {
+    const genTeleport = () => {
       if (!isMounted.value) return null
 
       return (
@@ -222,11 +230,11 @@ export default defineComponent({
       return () => (
         <>
           {slots.activator!(slotProps)}
-          {genModal()}
+          {genTeleport()}
         </>
       )
     }
 
-    return genModal
+    return genTeleport
   }
 })
