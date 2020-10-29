@@ -5,7 +5,7 @@ const defaultProps: VueNeatModalProps = {
   eager: false,
   teleportTarget: '#app',
   backdropTransition: undefined,
-  contentTransition: 'scale',
+  modalTransition: 'scale',
   disableMotion: false,
   removeBackdrop: false,
   width: 'auto',

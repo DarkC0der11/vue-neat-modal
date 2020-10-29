@@ -9,7 +9,7 @@ export declare interface VueNeatModalProps {
   eager?: boolean;
   teleportTarget?: string;
   backdropTransition?: string | undefined;
-  contentTransition?: string | undefined;
+  modalTransition?: string | undefined;
   disableMotion?: boolean;
   removeBackdrop?: boolean;
   width?: string;

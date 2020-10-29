@@ -12,22 +12,22 @@ export default {
         v-slots={{
           activator: (props) => (
             <button {...props}>
-                Basic
+              Basic
             </button>
           ),
 
           default: ({ close }) => (
             <div class="card">
               <h1 class="card__title">
-                  Modal content
+                Modal content
               </h1>
 
               <p class="card__text">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores nisi consectetur sequi molestias animi eveniet laboriosam quibusdam omnis, quam sed sapiente cum quia fugiat. Temporibus illo similique optio expedita perferendis?
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores nisi consectetur sequi molestias animi eveniet laboriosam quibusdam omnis, quam sed sapiente cum quia fugiat. Temporibus illo similique optio expedita perferendis?
               </p>
 
               <button onClick={close}>
-                  Close
+                Close
               </button>
             </div>
           )

@@ -48,9 +48,9 @@ export default defineComponent({
       default: () => getDefaultProp('backdropTransition')
     },
 
-    contentTransition: {
+    modalTransition: {
       type: String,
-      default: () => getDefaultProp('contentTransition')
+      default: () => getDefaultProp('modalTransition')
     },
 
     disableMotion: {
@@ -198,7 +198,7 @@ export default defineComponent({
       return (
         <Transition
           appear
-          name={props.contentTransition}
+          name={props.modalTransition}
           onAfterEnter={() => emit('after-enter')}
         >
           {modal}
