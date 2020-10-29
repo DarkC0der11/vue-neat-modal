@@ -6,9 +6,11 @@ import {
   ref,
   watch,
   Transition,
-  onUnmounted
+  onUnmounted,
+  nextTick
 } from 'vue'
 
+import { getScrollbarWidth } from '../../utils'
 import { getDefaultProp } from '../../default-props'
 
 const COMPONENT_CLASS = 'vue-neat-modal'
@@ -120,10 +122,28 @@ export default defineComponent({
       props.backdropClass
     ])
 
+    const disableScroll = () => {
+      document.body.classList.add(`${COMPONENT_CLASS}-open`)
+      document.body.style.paddingRight = `${getScrollbarWidth()}px`
+    }
+
+    const enableScroll = () => {
+      document.body.classList.remove(`${COMPONENT_CLASS}-open`)
+      document.body.style.paddingRight = ''
+    }
+
     watch([() => props.modelValue, innerValue], (modelValue, innerValue) => {
       if (!isMounted.value && (modelValue || innerValue)) {
         isMounted.value = true
       }
+    })
+
+    watch(isVisible, (value) => {
+      nextTick(() => {
+        if (!value) return
+
+        disableScroll()
+      })
     })
 
     const onClickOut = () => {
@@ -153,7 +173,13 @@ export default defineComponent({
 
     onUnmounted(() => {
       document.removeEventListener('click', onDocumentClick)
+      enableScroll()
     })
+
+    const onBackdropAfterLeave = () => {
+      enableScroll()
+      emit('after-leave')
+    }
 
     const genBackdrop = () => {
       if (props.removeBackdrop) return null
@@ -171,7 +197,7 @@ export default defineComponent({
         <Transition
           appear
           name={props.backdropTransition}
-          onAfterLeave={() => emit('after-leave')}
+          onAfterLeave={onBackdropAfterLeave}
         >
           {backdrop}
         </Transition>
