@@ -91,6 +91,14 @@ export default defineComponent({
         innerValue.value
     ))
 
+    const setVisibility = (value: boolean) => {
+      if (props.modelValue === undefined) {
+        innerValue.value = value
+      } else {
+        emit('update:modelValue', value)
+      }
+    }
+
     const modalStyle = computed(() => ({
       maxWidth: props.maxWidth
     }))
@@ -120,12 +128,7 @@ export default defineComponent({
 
     const onClickOut = () => {
       if (!props.clickOut) return
-
-      if (props.modelValue === undefined) {
-        innerValue.value = false
-      } else {
-        emit('update:modelValue', false)
-      }
+      setVisibility(false)
     }
 
     const onDocumentClick = (e: MouseEvent) => {
@@ -176,13 +179,7 @@ export default defineComponent({
     }
 
     const defaultSlotProps = {
-      close: () => {
-        if (props.modelValue !== undefined) {
-          emit('update:modelValue', false)
-        } else {
-          innerValue.value = false
-        }
-      }
+      close: () => setVisibility(false)
     }
 
     const genModal = () => {
@@ -228,13 +225,7 @@ export default defineComponent({
 
     if (slots.activator) {
       const slotProps = {
-        onClick: () => {
-          if (props.modelValue === undefined) {
-            innerValue.value = !innerValue.value
-          } else {
-            emit('update:modelValue', !props.modelValue)
-          }
-        }
+        onClick: () => setVisibility(!isVisible.value)
       }
 
       return () => (
