@@ -123,7 +123,7 @@ export default defineComponent({
     }
 
     const onDocumentClick = (e: MouseEvent) => {
-      if (e.bubbles && !isVisible.value) return
+      if (!isVisible.value) return
 
       const target = e.target as HTMLElement
 
