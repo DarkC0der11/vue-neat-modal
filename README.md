@@ -2,6 +2,8 @@
 
 ⚙️ Highly flexible and customizable Vue 3 Modal window component.
 
+[Demos on CodeSandbox](https://codesandbox.io/s/vue-neat-modal-rw850?file=/src/App.vue) 
+
 ## 🔥 Why Vue Neat Modal ?
 
 ⬆️ The modal uses Vue 3 portal feature to detach modal to documents root, no
