@@ -70,7 +70,11 @@ export default defineComponent({
     fullscreen: {
       type: Boolean,
       default: () => getDefaultProp('fullscreen')
-    }
+    },
+
+    wrapperClass: String,
+    modalClass: String,
+    backdropClass: String
   },
 
   setup (props, { slots, emit }) {
@@ -85,10 +89,22 @@ export default defineComponent({
       maxWidth: props.maxWidth
     }))
 
-    const classes = computed(() => ({
-      [`${COMPONENT_CLASS}`]: true,
-      [`${COMPONENT_CLASS}--fullscreen`]: props.fullscreen
-    }))
+    const classes = computed(() => [
+      COMPONENT_CLASS,
+      props.fullscreen && `${COMPONENT_CLASS}--fullscreen`,
+      props.modalClass
+    ])
+
+    const wrapperClasses = computed(() => [
+      `${COMPONENT_CLASS}-wrapper`,
+      props.wrapperClass
+    ])
+
+    const backdropClasses = computed(() => [
+      `${COMPONENT_CLASS}-backdrop`,
+      isVisible.value && `${COMPONENT_CLASS}-backdrop--active`,
+      props.backdropClass
+    ])
 
     watch([() => props.modelValue, innerValue], (modelValue, innerValue) => {
       if (!isMounted.value && (modelValue || innerValue)) {
@@ -136,10 +152,7 @@ export default defineComponent({
       const backdrop = (
         <div
           v-show={isVisible.value}
-          class={{
-            [`${COMPONENT_CLASS}-backdrop`]: true,
-            [`${COMPONENT_CLASS}-backdrop--active`]: isVisible.value
-          }}
+          class={backdropClasses.value}
         />
       )
 
@@ -179,7 +192,7 @@ export default defineComponent({
     }
 
     const genWrapper = () => (
-      <div class={`${COMPONENT_CLASS}-wrapper`}>
+      <div class={wrapperClasses.value}>
         {genContent()}
       </div>
     )

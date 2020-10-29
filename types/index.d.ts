@@ -15,6 +15,9 @@ export declare interface VueNeatModalProps {
   width?: string;
   maxWidth?: string;
   fullscreen?: boolean;
+  wrapperClass?: string;
+  modalClass?: string;
+  backdropClass?: string;
   [key: string]: any;
 }
 
