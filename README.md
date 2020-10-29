@@ -52,23 +52,25 @@ Global registration:
   app.component('AppModal', Modal)
 ```
 
-Use It
+Usage, simplest without a model
 ```html
   <template>
-    <Modal v-model="isOpen" max-width="480px">
+    <Modal max-width="500px">
       <template #activator="props">
         <button v-bind="props">
           Open Modal
         </button>
       </template>
 
-      <div>
-        Modal Content
+      <template #default="{ close }">
+        <div>
+          Modal Content
 
-        <button @click="isOpen = false">
-          Close
-        </button>
-      </div>
+          <button @click="close">
+            Close
+          </button>
+        </div>
+      </template>
     </Modal>
   </template>
 ```
