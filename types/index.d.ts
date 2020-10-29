@@ -18,9 +18,7 @@ export declare interface VueNeatModalProps {
   [key: string]: any;
 }
 
-export declare interface VueNeatModalPluginOptions {
-  defaultProps: VueNeatModalProps;
-}
+export declare function setDefaultProps(props: VueNeatModalProps): void;
 
 export declare const Modal: new () => {
   $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & VueNeatModalProps;

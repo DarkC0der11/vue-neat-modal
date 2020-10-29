@@ -9,7 +9,7 @@ import {
   onUnmounted
 } from 'vue'
 
-import { getGlobalPropDefault } from '../../prop-defaults'
+import { getDefaultProp } from '../../prop-defaults'
 
 const COMPONENT_CLASS = 'vue-neat-modal'
 
@@ -24,52 +24,52 @@ export default defineComponent({
 
     eager: {
       type: Boolean,
-      default: () => getGlobalPropDefault('eager')
+      default: () => getDefaultProp('eager')
     },
 
     clickOut: {
       type: Boolean,
-      default: () => getGlobalPropDefault('clickOut')
+      default: () => getDefaultProp('clickOut')
     },
 
     teleportTarget: {
       type: [String, HTMLElement],
-      default: () => getGlobalPropDefault('teleportTarget')
+      default: () => getDefaultProp('teleportTarget')
     },
 
     backdropTransition: {
       type: String,
-      default: () => getGlobalPropDefault('backdropTransition')
+      default: () => getDefaultProp('backdropTransition')
     },
 
     contentTransition: {
       type: String,
-      default: () => getGlobalPropDefault('contentTransition')
+      default: () => getDefaultProp('contentTransition')
     },
 
     disableMotion: {
       type: Boolean,
-      default: () => getGlobalPropDefault('disableMotion')
+      default: () => getDefaultProp('disableMotion')
     },
 
     removeBackdrop: {
       type: Boolean,
-      default: () => getGlobalPropDefault('removeBackdrop')
+      default: () => getDefaultProp('removeBackdrop')
     },
 
     width: {
       type: String,
-      default: () => getGlobalPropDefault('width')
+      default: () => getDefaultProp('width')
     },
 
     maxWidth: {
       type: String,
-      default: () => getGlobalPropDefault('maxWidth')
+      default: () => getDefaultProp('maxWidth')
     },
 
     fullscreen: {
       type: Boolean,
-      default: () => getGlobalPropDefault('fullscreen')
+      default: () => getDefaultProp('fullscreen')
     }
   },
 

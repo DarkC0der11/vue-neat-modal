@@ -1,6 +1,6 @@
 import { VueNeatModalProps } from 'types'
 
-const propDefaults: VueNeatModalProps = {
+const defaultProps: VueNeatModalProps = {
   clickOut: true,
   eager: false,
   teleportTarget: '#app',
@@ -13,15 +13,15 @@ const propDefaults: VueNeatModalProps = {
   fullscreen: false
 }
 
-const setDefaults = (options: VueNeatModalProps | undefined) => {
+const setDefaultProps = (options: VueNeatModalProps | undefined) => {
   if (!options) return
 
-  Object.assign(propDefaults, options)
+  Object.assign(defaultProps, options)
 }
 
-const getGlobalPropDefault = (prop: string) => propDefaults[prop]
+const getDefaultProp = (prop: string) => defaultProps[prop]
 
 export {
-  setDefaults,
-  getGlobalPropDefault
+  setDefaultProps,
+  getDefaultProp
 }
