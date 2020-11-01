@@ -176,22 +176,24 @@ In your main entry file
 ```
 
 ### Props
-| prop               | desc                                                                               | type                  | default   |
-|--------------------|------------------------------------------------------------------------------------|-----------------------|-----------|
-| modelValue         | Value which controls the visibility                                                | `boolean`               | `false`     |
-| clickOut           | Whether click out closes the modal or not                                          | `boolean`               | `true`      |
-| eager              | Controls whether component should mount immediately even if it has not been opened | `boolean`               | `false`     |
-| teleportTarget     | Where should modal be detached to.                                                 | `string` \| `HTMLElement` | "#app"    |
-| backdropTransition | Backdrop overlays transition                                                       | `string`                | `undefined` |
-| modalTransition    | The modal content transition                                                       | `string`                | "scale"     |
-| disableMotion      | Disable transition on `backdrop` and `modal`                                         | `boolean`               | `false`     |
-| removeBackdrop     | Do not render `backdrop`                                                             | `boolean`               | `false`     |
-| width              | The width css property of the `modal`                                              | `string`                | "auto"    |
-| maxWidth | The max-width css property of the `modal`                                              | `string`                | "none"    |
-| fullscreen | Makes content cover whole modal, and removes spacing | `boolean` | `false` |
-| backdropClass | Add class to backdrop | `string` | `undefined` |
-| wrapperClass | Add class to wrapper | `string` | `undefined` |
-| modalClass | Add class to modal | `string` | `undefined` |
+| prop               | desc                                                                                 | type                      | default     |
+|--------------------|--------------------------------------------------------------------------------------|---------------------------|-------------|
+| modelValue         | Value which controls the visibility                                                  | `boolean`                 | `false`     |
+| alignX             | Horizontal alignment of the modal, available values: `left`, `center`, `right`       | `string`                  | "center"    |
+| alignY             | Vertical alignment of the modal, available values: `top`, `center`, `bottom`         | `string`                  | "center"    |
+| clickOut           | Whether click out closes the modal or not                                            | `boolean`                 | `true`      |
+| eager              | Controls whether component should mount immediately even if it has not been opened   | `boolean`                 | `false`     |
+| teleportTarget     | Where should modal be detached to.                                                   | `string` \| `HTMLElement` | "#app"      |
+| backdropTransition | Backdrop overlays transition                                                         | `string`                  | `undefined` |
+| modalTransition    | The modal content transition                                                         | `string`                  | "scale"     |
+| disableMotion      | Disable transition on `backdrop` and `modal`                                         | `boolean`                 | `false`     |
+| removeBackdrop     | Do not render `backdrop`                                                             | `boolean`                 | `false`     |
+| width              | The width css property of the `modal`                                                | `string`                  | "auto"      |
+| maxWidth           | The max-width css property of the `modal`                                            | `string`                  | "none"      |
+| fullscreen         | Makes content cover whole modal, and removes spacing                                 | `boolean`                 | `false`     |
+| backdropClass      | Add class to backdrop                                                                | `string`                  | `undefined` |
+| wrapperClass       | Add class to wrapper                                                                 | `string`                  | `undefined` |
+| modalClass         | Add class to modal                                                                   | `string`                  | `undefined` |
 
 ### Events
 | name          | desc |                                                                      

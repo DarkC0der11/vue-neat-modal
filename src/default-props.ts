@@ -1,6 +1,8 @@
 import { VueNeatModalProps } from 'types'
 
 const defaultProps: VueNeatModalProps = {
+  alignX: 'center',
+  alignY: 'center',
   clickOut: true,
   eager: false,
   teleportTarget: '#app',

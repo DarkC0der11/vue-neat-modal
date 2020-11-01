@@ -30,6 +30,18 @@ export default defineComponent({
       default: undefined
     },
 
+    alignX: {
+      type: String,
+      validator: (v: string) => ['left', 'center', 'right'].includes(v),
+      default: () => getDefaultProp('alignX')
+    },
+
+    alignY: {
+      type: String,
+      validator: (v: string) => ['top', 'center', 'bottom'].includes(v),
+      default: () => getDefaultProp('alignY')
+    },
+
     eager: {
       type: Boolean,
       default: () => getDefaultProp('eager')
@@ -111,8 +123,11 @@ export default defineComponent({
       props.modalClass
     ])
 
+    const wrapperBaseClass = `${COMPONENT_CLASS}-wrapper`
     const wrapperClasses = computed(() => [
-      `${COMPONENT_CLASS}-wrapper`,
+      wrapperBaseClass,
+      `${wrapperBaseClass}--x-${props.alignX}`,
+      `${wrapperBaseClass}--y-${props.alignY}`,
       props.wrapperClass
     ])
 

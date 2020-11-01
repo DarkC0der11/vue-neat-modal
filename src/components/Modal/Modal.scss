@@ -33,9 +33,33 @@ body.vue-neat-modal-open {
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
   pointer-events: none;
+
+  // X-Positions
+  &--x-left {
+    justify-content: flex-start;
+  }
+
+  &--x-center {
+    justify-content: center;
+  }
+
+  &--x-right {
+    justify-content: flex-end;
+  }
+
+  // Y-Positions
+  &--y-top {
+    align-items: flex-start;
+  }
+
+  &--y-center {
+    align-items: center;
+  }
+
+  &--y-bottom {
+    align-items: flex-end;
+  }
 }
 
 .vue-neat-modal {
