@@ -67,9 +67,12 @@ body.vue-neat-modal-open {
   z-index: 1;
   pointer-events: auto;
   transition: .3s cubic-bezier(0.25, 0.8, 0.5, 1);
-  margin: 24px;
   max-height: 90%;
   overflow-y: auto;
+
+  &:not(&--no-spacing) {
+    margin: 24px;
+  }
 
   &--fullscreen {
     position: fixed;

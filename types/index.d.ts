@@ -7,6 +7,7 @@ import {
 export declare interface VueNeatModalProps {
   alignY: 'top' | 'center' | 'bottom';
   alignX: 'left' | 'center' | 'right';
+  noSpacing: boolean;
   clickOut?: boolean;
   eager?: boolean;
   teleportTarget?: string;

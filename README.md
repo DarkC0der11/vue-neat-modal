@@ -181,6 +181,7 @@ In your main entry file
 | modelValue         | Value which controls the visibility                                                  | `boolean`                 | `false`     |
 | alignX             | Horizontal alignment of the modal, available values: `left`, `center`, `right`       | `string`                  | "center"    |
 | alignY             | Vertical alignment of the modal, available values: `top`, `center`, `bottom`         | `string`                  | "center"    |
+| noSpacing          | Remove margin on modal                                                               | `string`                  | `false`     |
 | clickOut           | Whether click out closes the modal or not                                            | `boolean`                 | `true`      |
 | eager              | Controls whether component should mount immediately even if it has not been opened   | `boolean`                 | `false`     |
 | teleportTarget     | Where should modal be detached to.                                                   | `string` \| `HTMLElement` | "#app"      |

@@ -42,6 +42,11 @@ export default defineComponent({
       default: () => getDefaultProp('alignY')
     },
 
+    noSpacing: {
+      type: Boolean,
+      default: () => getDefaultProp('noSpacing')
+    },
+
     eager: {
       type: Boolean,
       default: () => getDefaultProp('eager')
@@ -120,6 +125,7 @@ export default defineComponent({
     const modalClasses = computed(() => [
       COMPONENT_CLASS,
       props.fullscreen && `${COMPONENT_CLASS}--fullscreen`,
+      props.noSpacing && `${COMPONENT_CLASS}--no-spacing`,
       props.modalClass
     ])
 
