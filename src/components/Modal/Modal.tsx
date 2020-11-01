@@ -119,6 +119,7 @@ export default defineComponent({
     }
 
     const modalStyle = computed(() => ({
+      width: props.width,
       maxWidth: props.maxWidth
     }))
 
